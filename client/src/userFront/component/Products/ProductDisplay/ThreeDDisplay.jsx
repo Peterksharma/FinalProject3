@@ -6,9 +6,7 @@ import * as THREE from 'three';
 
 function Model({ modelPath }) {
   const objRef = useRef();
-  
   const { scene } = useLoader(GLTFLoader, modelPath);
-  console.log("Model Path:", modelPath);
   
   useEffect(() => {
     if (objRef.current) {
@@ -19,15 +17,11 @@ function Model({ modelPath }) {
   return <primitive ref={objRef} object={scene} position={[0, 0, 0]} />;
 }
 
-
-
 function Lighting() {
   return (
     <>
-      {/* <pointLight position={[0, 10, -10]} intensity={1.5} /> */}
       <directionalLight position={[10, 10, 20]} intensity={3} />
       <directionalLight position={[-10, -10, -20]} intensity={3} />
-
     </>
   );
 }
@@ -40,19 +34,12 @@ function Background() {
   return null;
 }
 
-
-
 function Camera() {
   const { camera } = useThree();
   useEffect(() => {
     camera.fov = 75;
     camera.updateProjectionMatrix();
   }, [camera]);
-
-  useFrame(() => {
-    camera.updateProjectionMatrix();
-  });
-
   return null;
 }
 
@@ -82,4 +69,3 @@ export default function Display({ modelPath }) {
     </div>
   );
 }
-
